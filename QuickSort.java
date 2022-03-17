@@ -1,6 +1,6 @@
 package com.algo;
 
-public class MergeSort {
+public class QuickSort {
 	
 	public  static void conquer(int arr[], int lb, int mid ,int ub) {
 		int merged[]=new int[ub-lb+1];
