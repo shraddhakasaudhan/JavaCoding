@@ -1,58 +1,48 @@
 package com.algo;
 
 public class QuickSort {
-	
-	public  static void conquer(int arr[], int lb, int mid ,int ub) {
-		int merged[]=new int[ub-lb+1];
-		int i=lb;
-		int j=mid+1;
-		int k=0;
-		while(i<=mid && j<=ub) {
-			if(arr[i]<=arr[j]) {
-				merged[k]=arr[i];
+
+	public static int partition(int arr[] , int lb, int ub) {
+		int pivot=arr[ub];
+		int i=lb-1;
+		for(int j=lb ;j<ub;j++) {
+			if(arr[j]<pivot) { // {6, 4 ,5 ,3, 9, 8}
 				i++;
-				k++;
-				}
-			else {
-				merged[k]=arr[j];
-				j++;
-				k++;
-				
+				//swap
+				int temp=arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
 			}
 		}
-		while(i<=mid) {
-			merged[k]=arr[i];
-			i++;
-			k++;
-			
-		}
-		while(j<=ub) {
-			merged[k]=arr[j];
-			j++;
-			k++;
-		}
-		for(int x=0, y=lb; x<merged.length;x++,y++) {
-			arr[y]=merged[x];
-		}
+		i++;
+		int temp=arr[i];
+		arr[i]=pivot;
+		arr[ub]=temp;
+
+		return i;
 	}
-	public static void divide(int arr[] ,int lb, int ub ) {
-		if(lb>=ub) {
-			return;
+
+	public static void quickSort(int arr[]  ,int lb  ,int ub) {
+		if(lb<ub) {
+			int loc=partition(arr,lb ,ub);
+			quickSort(arr, lb, loc-1);
+			quickSort(arr, loc+1, ub);
 		}
-		int mid=lb+(ub-lb)/2;
-	   divide (arr,lb,mid);
-	   divide(arr,mid+1,ub);
-	   conquer(arr,lb,mid,ub);
+
 	}
 	public static void main(String args[]) {
-		int arr[]= {5, 3 , 9, 2, 1, 6, 8};
+		int arr[]= {6, 4 ,5 ,3, 9, 8};
 		int n=arr.length;
-		divide(arr,0,n-1);
+		quickSort(arr, 0, n-1);
 		for(int i=0;i<n;i++) {
-			System.out.print(arr[i]+" ");
+			System.out.print(arr[i]+"   ");
+
 		}
 		System.out.println();
-		
+
+
 	}
 
 }
+
+
