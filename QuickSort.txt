@@ -1,4 +1,3 @@
-//mergeSortCode
 package com.algo;
 
 public class MergeSort {
